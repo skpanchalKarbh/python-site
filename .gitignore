@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+Patrakaar_Ekta_Foundation.zip
+.env
+.idea/
+.vscode/

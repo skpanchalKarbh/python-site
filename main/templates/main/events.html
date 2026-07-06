@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+{% block title %}Activities & Events - PATRAKAAR EKTA FOUNDATION{% endblock %}
+{% block content %}
+
+<!-- Premium Page Header -->
+<div class="py-5" style="background: linear-gradient(135deg, #0a1128 0%, #000000 100%); border-bottom: 2px solid var(--accent-color);">
+    <div class="container text-center py-4" data-aos="fade-down">
+        <h1 class="display-4 fw-bold text-white mb-0" style="text-shadow: 2px 2px 15px rgba(246,197,35,0.3);">All Activities & Events</h1>
+    </div>
+</div>
+
+<div class="container my-5 py-4">
+    <div class="row g-5">
+        {% for event in events %}
+        <div class="col-12" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <div class="card border-0" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(246, 197, 35, 0.2) !important; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(246,197,35,0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(246,197,35,0.2)';">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4 col-lg-3 text-center p-3">
+                        {% if event.image %}
+                        <img src="{{ event.image.url }}" class="img-fluid rounded-4 shadow" style="object-fit: contain; max-height: 250px; border: 1px solid rgba(255,255,255,0.1);" alt="{{ event.title }}">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8 col-lg-9">
+                        <div class="card-body p-4 p-md-5">
+                            <span class="badge mb-3 py-2 px-3 rounded-pill" style="background: var(--accent-color); color: #000;">{{ event.get_event_type_display }}</span>
+                            <h3 class="card-title text-white fw-bold mb-3">{{ event.title }}</h3>
+                            {% if event.date %}
+                            <p class="card-text text-white-50 mb-3"><i class="bi bi-calendar text-warning me-2"></i> {{ event.date|date:"F d, Y" }}</p>
+                            {% endif %}
+                            <p class="card-text text-light" style="line-height: 1.8; color: #cbd5e1 !important;">{{ event.description|linebreaksbr }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center text-white-50 py-5" data-aos="fade-up">
+            <i class="bi bi-calendar-x display-1 mb-3 d-block text-warning"></i>
+            <p class="fs-4">No events found. Please add events from the admin panel.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

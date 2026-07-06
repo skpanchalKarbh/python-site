@@ -1,0 +1,9 @@
+/* Make the long brand text wrap and fit in the sidebar */
+.brand-text, .brand-text.font-weight-light {
+    white-space: normal !important;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    display: block;
+    text-align: left;
+    margin-top: 5px;
+}

@@ -1,0 +1,410 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .hero-animated {
+        position: relative;
+        background: linear-gradient(135deg, #0a1128 0%, #000000 100%);
+        min-height: 85vh;
+        overflow: hidden;
+    }
+
+    #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    .hero-content-wrapper {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Typography */
+    .hero-text-main {
+        font-size: 4rem;
+        font-weight: 800;
+        color: white;
+        line-height: 1.1;
+        letter-spacing: -1px;
+        margin-bottom: 5px;
+    }
+
+    .hero-text-outline {
+        font-size: 3.8rem;
+        font-weight: 800;
+        color: transparent;
+        -webkit-text-stroke: 1.5px #f6c523;
+        line-height: 1.1;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+        display: inline-block;
+    }
+
+    .hero-paragraph {
+        color: #e2e8f0;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        max-width: 90%;
+        margin-bottom: 35px;
+    }
+
+    /* Gold Button */
+    .btn-gold {
+        background: linear-gradient(45deg, #f6c523, #e6b800);
+        color: #000;
+        border: none;
+        padding: 12px 35px;
+        border-radius: 30px;
+        font-weight: 800;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        box-shadow: 0 4px 15px rgba(246, 197, 35, 0.4);
+    }
+
+    .btn-gold:hover {
+        background: linear-gradient(45deg, #e6b800, #f6c523);
+        color: #000;
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(246, 197, 35, 0.6);
+    }
+
+    /* Custom Slider Navigation Arrows */
+    .slider-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        color: rgba(255, 255, 255, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .slider-nav-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .slider-nav-left {
+        left: 20px;
+    }
+
+    .slider-nav-right {
+        right: 20px;
+    }
+
+    /* Floating Animation for Image */
+    .floating-img {
+        animation: float 6s ease-in-out infinite;
+        filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    /* Premium Event Cards */
+    .event-card {
+        border: 1px solid rgba(246, 197, 35, 0.2);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(10px);
+        color: var(--text-color);
+    }
+
+    .event-card:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 20px 40px rgba(246, 197, 35, 0.2);
+        border-color: rgba(246, 197, 35, 0.6);
+    }
+
+    .event-image-wrapper {
+        height: 220px;
+        overflow: hidden;
+    }
+
+    .event-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .event-card:hover .event-image-wrapper img {
+        transform: scale(1.1);
+    }
+</style>
+
+<!-- Animated Hero Section -->
+<div class="hero-animated">
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Main Content -->
+    <div class="container hero-content-wrapper">
+        <div class="row align-items-center justify-content-center">
+
+            <!-- Left Text Content (Vision & Mission) -->
+            <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start z-index-2" data-aos="fade-right" data-aos-duration="1500">
+                <div class="mb-4">
+                    <h2 class="text-white fw-bold mb-2"><i class="bi bi-eye text-warning me-2"></i> Our Vision</h2>
+                    <p class="hero-paragraph mx-auto mx-lg-0 mb-0">
+                        {{ vision_mission.vision }}
+                    </p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="text-white fw-bold mb-2"><i class="bi bi-bullseye text-warning me-2"></i> Our Mission</h2>
+                    <p class="hero-paragraph mx-auto mx-lg-0">
+                        {{ vision_mission.mission }}
+                    </p>
+                </div>
+
+                <a href="{% url 'main:join_us' %}" class="btn text-dark text-decoration-none mt-2 fw-bold px-4 py-2 rounded-pill" style="background-color: #f6c523; box-shadow: 0 4px 15px rgba(246, 197, 35, 0.4); text-transform: uppercase;">Join Us</a>
+            </div>
+
+            <!-- Right Floating Logo -->
+            <div class="col-lg-5 offset-lg-1 text-center z-index-2 mt-5 mt-lg-0" data-aos="zoom-in" data-aos-duration="1500">
+                <img src="{% static 'main/logo.png' %}" alt="Culture Graphic" class="img-fluid floating-img" style="max-width: 90%; filter: drop-shadow(0 0 20px rgba(246,197,35,0.5));">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Introduction / Recent Events Section -->
+<div class="container py-5 my-5" data-aos="fade-up">
+    <h2 class="section-title">Discover Recent Events</h2>
+    <div class="row g-5 mt-2">
+        {% for event in events %}
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <div class="event-card h-100 d-flex flex-column">
+                {% if event.image %}
+                <div class="event-image-wrapper">
+                    <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                </div>
+                {% endif %}
+                <div class="card-body p-4 d-flex flex-column">
+                    <span class="badge mb-3 align-self-start py-2 px-3 rounded-pill" style="background: var(--accent-color); color: #000;">{{ event.get_event_type_display }}</span>
+                    <h4 class="card-title fw-bold mb-3 text-white">{{ event.title }}</h4>
+                    <p class="card-text mb-4 flex-grow-1" style="font-size: 1.05rem; line-height: 1.6; color: #cbd5e1;">{{ event.description|truncatewords:20 }}</p>
+                    <a href="{% url 'main:events' %}" class="text-decoration-none fw-bold"
+                        style="color: var(--accent-color);">Read Full Story <i class="bi bi-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <i class="bi bi-calendar-x display-1 text-muted mb-3 d-block"></i>
+            <h4 class="text-muted">No recent events found. Add them from the admin panel!</h4>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Impact Counters Section -->
+{% if counters %}
+<div class="container-fluid py-5 my-5" style="background: linear-gradient(135deg, #0a1128 0%, #000000 100%); border-top: 1px solid rgba(246, 197, 35, 0.2); border-bottom: 1px solid rgba(246, 197, 35, 0.2);">
+    <div class="container" data-aos="fade-up">
+        <div class="row text-center g-4">
+            {% for counter in counters %}
+            <div class="col-md-3 col-6">
+                <div class="p-4 rounded-4" style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)';" onmouseout="this.style.transform='translateY(0)';">
+                    <i class="bi {{ counter.icon_class }} display-4 mb-3" style="color: var(--accent-color); filter: drop-shadow(0 0 10px rgba(246,197,35,0.4));"></i>
+                    <h2 class="display-4 fw-bold text-white mb-0 counter-number" data-target="{{ counter.count }}">0</h2>
+                    <p class="text-white-50 fw-bold text-uppercase mt-2 mb-0" style="letter-spacing: 1px; font-size: 0.9rem;">{{ counter.title }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Testimonials Section -->
+{% if testimonial_chunks %}
+<div class="container py-4 my-4" data-aos="fade-up">
+    <h2 class="section-title">What People Say</h2>
+    
+    <div id="testimonialCarousel" class="carousel slide mt-5" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            {% for chunk in testimonial_chunks %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="row justify-content-center g-4">
+                    {% for testimonial in chunk %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card border-0 text-center p-4 h-100" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(246, 197, 35, 0.3) !important; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);">
+                            
+                            <!-- User Image -->
+                            <div class="mb-3">
+                                {% if testimonial.image %}
+                                    <img src="{{ testimonial.image.url }}" alt="{{ testimonial.author }}" class="rounded-circle shadow" style="width: 70px; height: 70px; object-fit: cover; border: 2px solid var(--accent-color); margin: 0 auto;">
+                                {% else %}
+                                    <div class="rounded-circle shadow mx-auto d-flex align-items-center justify-content-center" style="width: 70px; height: 70px; background: linear-gradient(45deg, #0a1128, #111827); border: 2px solid var(--accent-color);">
+                                        <i class="bi bi-person-fill text-white fs-3"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Quote -->
+                            <div class="mb-3 flex-grow-1">
+                                <i class="bi bi-quote fs-3" style="color: rgba(246, 197, 35, 0.5);"></i>
+                                <p class="fst-italic text-light mb-0" style="line-height: 1.6; color: #e2e8f0 !important; font-size: 0.95rem;">"{{ testimonial.quote }}"</p>
+                            </div>
+                            
+                            <!-- Author -->
+                            <div>
+                                <h5 class="fw-bold mb-1" style="color: var(--accent-color);">{{ testimonial.author }}</h5>
+                                {% if testimonial.role %}
+                                <span class="text-white-50 small">{{ testimonial.role }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Controls -->
+        <div class="d-flex justify-content-center mt-5 gap-3">
+            <button class="btn rounded-circle d-flex align-items-center justify-content-center" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev" style="width: 50px; height: 50px; background: rgba(246,197,35,0.1); border: 1px solid var(--accent-color); color: var(--accent-color); transition: all 0.3s ease;" onmouseover="this.style.background='var(--accent-color)'; this.style.color='#000';" onmouseout="this.style.background='rgba(246,197,35,0.1)'; this.style.color='var(--accent-color)';">
+                <i class="bi bi-chevron-left fs-4"></i>
+            </button>
+            <button class="btn rounded-circle d-flex align-items-center justify-content-center" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next" style="width: 50px; height: 50px; background: rgba(246,197,35,0.1); border: 1px solid var(--accent-color); color: var(--accent-color); transition: all 0.3s ease;" onmouseover="this.style.background='var(--accent-color)'; this.style.color='#000';" onmouseout="this.style.background='rgba(246,197,35,0.1)'; this.style.color='var(--accent-color)';">
+                <i class="bi bi-chevron-right fs-4"></i>
+            </button>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<!-- particles.js lib -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 60,
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": "#f6c523" },
+                "shape": { "type": "circle" },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#f6c523",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 3,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
+        });
+    });
+
+    // Impact Counter Animation Logic
+    document.addEventListener("DOMContentLoaded", function() {
+        const counters = document.querySelectorAll('.counter-number');
+        const speed = 200; // The lower the slower
+
+        const animateCounters = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    
+                    const updateCount = () => {
+                        const count = +counter.innerText;
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target + "+";
+                        }
+                    };
+
+                    updateCount();
+                    observer.unobserve(counter); // Only animate once
+                }
+            });
+        };
+
+        const counterObserver = new IntersectionObserver(animateCounters, {
+            root: null,
+            threshold: 0.5 // Start animation when 50% visible
+        });
+
+        counters.forEach(counter => {
+            counterObserver.observe(counter);
+        });
+    });
+</script>
+{% endblock %}

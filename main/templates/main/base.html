@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PATRAKAAR EKTA FOUNDATION{% endblock %}</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'main/logo.png' %}">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0a1128;
+            /* Deep modern navy */
+            --accent-color: #f6c523;
+            /* Gold / Yellow */
+            --bg-dark: #050a15;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+        }
+
+        /* Modern Glassmorphism Navbar */
+        .navbar {
+            background: rgba(10, 17, 40, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(246, 197, 35, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand span {
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-link {
+            color: #e2e8f0 !important;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            padding: 10px 15px !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 70%;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+
+        /* Modern Footer */
+        .footer {
+            background: var(--primary-color);
+            color: #cbd5e1;
+            padding: 60px 0 40px;
+            margin-top: 80px;
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .footer h4 {
+            color: white;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .footer .social-icons a {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            line-height: 45px;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .footer .social-icons a:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+            color: white !important;
+        }
+
+        /* Section Titles */
+        .section-title {
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Mobile Responsive Header Fixes */
+        @media (max-width: 768px) {
+            .navbar-brand img {
+                height: 55px !important;
+            }
+
+            .navbar-brand span {
+                font-size: 1.1rem !important;
+                white-space: normal;
+                line-height: 1.2;
+            }
+
+            .navbar-brand {
+                max-width: 80%;
+            }
+        }
+
+        .hover-white {
+            transition: color 0.3s ease;
+        }
+
+        .hover-white:hover {
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'main:home' %}">
+                <img src="{% static 'main/logo.png' %}" alt="Logo" height="100" class="me-3">
+                <span class="fs-4 fw-bold">PATRAKAAR EKTA FOUNDATION</span>
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-white"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'main:home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'main:events' %}">Event</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'main:gallery' %}">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'main:about' %}">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'main:contact' %}">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Block -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="footer pt-5 pb-3">
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Column 1: Logo and About -->
+                <div class="col-lg-4 col-md-6 pe-lg-5">
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="{% static 'main/logo.png' %}" alt="Logo" height="50"
+                            class="me-3 bg-white p-1 rounded shadow-sm">
+                        <h4 class="mb-0 fw-bold text-white fs-5">PATRAKAAR EKTA FOUNDATION</h4>
+                    </div>
+                    <p class="text-white-50 mb-4" style="line-height: 1.8;">
+                        Empowering culture, art, and society globally through sustainable development and dedicated
+                        initiatives.
+                    </p>
+                    <div class="social-icons text-start">
+                        <a href="#" class="text-white"><i class="bi bi-facebook fs-6"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-twitter fs-6"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram fs-6"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube fs-6"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white fw-bold mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{% url 'main:home' %}"
+                                class="text-white-50 text-decoration-none hover-white"><i
+                                    class="bi bi-chevron-right me-2 text-warning"></i>Home</a></li>
+                        <li class="mb-2"><a href="{% url 'main:events' %}"
+                                class="text-white-50 text-decoration-none hover-white"><i
+                                    class="bi bi-chevron-right me-2 text-warning"></i>Events</a></li>
+                        <li class="mb-2"><a href="{% url 'main:gallery' %}"
+                                class="text-white-50 text-decoration-none hover-white"><i
+                                    class="bi bi-chevron-right me-2 text-warning"></i>Gallery</a></li>
+                        <li class="mb-2"><a href="{% url 'main:about' %}"
+                                class="text-white-50 text-decoration-none hover-white"><i
+                                    class="bi bi-chevron-right me-2 text-warning"></i>About Us</a></li>
+                        <li class="mb-2"><a href="{% url 'main:contact' %}"
+                                class="text-white-50 text-decoration-none hover-white"><i
+                                    class="bi bi-chevron-right me-2 text-warning"></i>Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact Info -->
+                <div class="col-lg-5 col-md-12">
+                    <h5 class="text-white fw-bold mb-4">Contact Information</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-geo-alt-fill text-warning fs-5 me-3 mt-1"></i>
+                            <div>
+                                <strong class="text-white d-block mb-1">Our Office Address</strong>
+                                <span>Above Patel Art, Opposite BSNL Office,<br>Chakaliya Road, Dahod – 389151, Gujarat,
+                                    India</span>
+                            </div>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-telephone-fill text-warning fs-5 me-3"></i>
+                            <span>+91 9712666609 (WhatsApp)</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-envelope-fill text-warning fs-5 me-3"></i>
+                            <span>patrakaarektafoundation@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="mt-5 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row align-items-center text-center text-md-start">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="mb-0 small text-white-50">&copy; 2026 PATRAKAAR EKTA FOUNDATION. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white-50 text-decoration-none small me-3 hover-white">Privacy Policy</a>
+                    <a href="#" class="text-white-50 text-decoration-none small hover-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

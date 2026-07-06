@@ -1,0 +1,93 @@
+{% extends 'main/base.html' %}
+{% block title %}Contact Us - PATRAKAAR EKTA FOUNDATION{% endblock %}
+{% block content %}
+
+<!-- Premium Page Header -->
+<div class="py-5" style="background: linear-gradient(135deg, #0a1128 0%, #000000 100%); border-bottom: 2px solid var(--accent-color);">
+    <div class="container text-center py-4" data-aos="fade-down">
+        <h1 class="display-4 fw-bold text-white mb-0" style="text-shadow: 2px 2px 15px rgba(246,197,35,0.3);">Contact Us</h1>
+    </div>
+</div>
+
+<div class="container my-5 py-4">
+    <div class="row g-5">
+        <!-- Contact Form -->
+        <div class="col-lg-7 mb-4" data-aos="fade-right">
+            <div class="card border-0 h-100" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(246, 197, 35, 0.2) !important; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+                <div class="card-body p-4 p-md-5">
+                    <h3 class="mb-4 text-white fw-bold">Send us a message</h3>
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" style="background: rgba(25, 135, 84, 0.2); color: #fff; border: 1px solid #198754;">
+                                {{ message }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST" action="{% url 'main:contact' %}">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="name" class="form-label text-white-50">Full Name *</label>
+                            <input type="text" class="form-control" id="name" name="name" required style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px; padding: 12px;">
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-4 mb-md-0">
+                                <label for="email" class="form-label text-white-50">Email Address *</label>
+                                <input type="email" class="form-control" id="email" name="email" required style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px; padding: 12px;">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label text-white-50">Phone Number</label>
+                                <input type="text" class="form-control" id="phone" name="phone" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px; padding: 12px;">
+                            </div>
+                        </div>
+                        <div class="mb-5">
+                            <label for="message" class="form-label text-white-50">Your Message *</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px; padding: 12px;"></textarea>
+                        </div>
+                        <button type="submit" class="btn px-4 py-3 w-100 fw-bold" style="background: linear-gradient(45deg, #f6c523, #e6b800); color: #000; border-radius: 10px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(246, 197, 35, 0.4);">
+                            Send Message <i class="bi bi-send ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-lg-5 mb-4" data-aos="fade-left">
+            <div class="card border-0 h-100" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(10, 17, 40, 0.9) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(246, 197, 35, 0.2) !important; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+                <div class="card-body p-4 p-md-5 d-flex flex-column justify-content-center">
+                    <h3 class="mb-5 text-white fw-bold">Get in Touch</h3>
+                    
+                    <div class="d-flex mb-5 align-items-start">
+                        <div class="fs-2 me-4" style="color: var(--accent-color);"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h4 class="text-white mb-2">Head Office</h4>
+                            <p class="mb-0" style="color: #cbd5e1; line-height: 1.8;">Above Patel Art, Opposite BSNL Office, Chakaliya Road, Dahod – 389151, Gujarat, India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex mb-5 align-items-center">
+                        <div class="fs-2 me-4" style="color: var(--accent-color);"><i class="bi bi-envelope-fill"></i></div>
+                        <div>
+                            <h4 class="text-white mb-2">Email Us</h4>
+                            <p class="mb-0" style="color: #cbd5e1;">patrakaarektafoundation@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center">
+                        <div class="fs-2 me-4" style="color: var(--accent-color);"><i class="bi bi-telephone-fill"></i></div>
+                        <div>
+                            <h4 class="text-white mb-2">Call Us</h4>
+                            <p class="mb-0 fs-5" style="color: #cbd5e1;">+91 9712666609</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
