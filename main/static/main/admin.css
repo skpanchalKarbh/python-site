@@ -7,3 +7,14 @@
     text-align: left;
     margin-top: 5px;
 }
+
+/* Fix for giant logo on login screen */
+.login-logo img, 
+.login-box img, 
+.login-box img.logo {
+    max-height: 120px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
