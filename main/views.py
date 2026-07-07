@@ -58,16 +58,13 @@ def contact(request):
             name=name, email=email, phone=phone, message=message
         )
         
-        # Send Email Notification to Admin in background to prevent loading delay
-        def send_contact_email():
-            try:
-                subject = f"New Website Enquiry from {name}"
-                body = f"You have received a new enquiry.\n\nName: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
-                send_mail(subject, body, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=True)
-            except Exception as e:
-                print(f"Email failed: {e}")
-        
-        threading.Thread(target=send_contact_email).start()
+        # Send Email Notification to Admin synchronously
+        try:
+            subject = f"New Website Enquiry from {name}"
+            body = f"You have received a new enquiry.\n\nName: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+            send_mail(subject, body, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=True)
+        except Exception as e:
+            print(f"Email failed: {e}")
             
         messages.success(request, 'Your message has been sent successfully!')
         return redirect('main:contact')
@@ -87,16 +84,13 @@ def join_us(request):
             profession=profession, message=message
         )
         
-        # Send Email Notification to Admin in background to prevent loading delay
-        def send_volunteer_email():
-            try:
-                subject = f"New Volunteer Application from {name}"
-                body = f"You have received a new volunteer application.\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nProfession: {profession}\n\nMessage:\n{message}"
-                send_mail(subject, body, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=True)
-            except Exception as e:
-                print(f"Email failed: {e}")
-
-        threading.Thread(target=send_volunteer_email).start()
+        # Send Email Notification to Admin synchronously
+        try:
+            subject = f"New Volunteer Application from {name}"
+            body = f"You have received a new volunteer application.\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nProfession: {profession}\n\nMessage:\n{message}"
+            send_mail(subject, body, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=True)
+        except Exception as e:
+            print(f"Email failed: {e}")
 
         messages.success(request, 'Thank you! Your application has been submitted successfully. Our team will contact you soon.')
         return redirect('main:join_us')
