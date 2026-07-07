@@ -62,11 +62,12 @@ def contact(request):
         try:
             subject = f"New Website Enquiry from {name}"
             body = f"You have received a new enquiry.\n\nName: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
-            send_mail(subject, body, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=True)
+            send_mail(subject, body, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=False)
+            messages.success(request, 'Your message has been sent successfully!')
         except Exception as e:
             print(f"Email failed: {e}")
+            messages.error(request, f"Form submitted, but email failed: {str(e)}")
             
-        messages.success(request, 'Your message has been sent successfully!')
         return redirect('main:contact')
         
     return render(request, 'main/contact.html')
@@ -88,11 +89,12 @@ def join_us(request):
         try:
             subject = f"New Volunteer Application from {name}"
             body = f"You have received a new volunteer application.\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nProfession: {profession}\n\nMessage:\n{message}"
-            send_mail(subject, body, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=True)
+            send_mail(subject, body, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=False)
+            messages.success(request, 'Thank you! Your application has been submitted successfully. Our team will contact you soon.')
         except Exception as e:
             print(f"Email failed: {e}")
+            messages.error(request, f"Form submitted, but email failed: {str(e)}")
 
-        messages.success(request, 'Thank you! Your application has been submitted successfully. Our team will contact you soon.')
         return redirect('main:join_us')
         
     return render(request, 'main/join_us.html')
