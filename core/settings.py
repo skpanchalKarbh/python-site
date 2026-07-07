@@ -149,12 +149,24 @@ JAZZMIN_SETTINGS = {
         "main.Gallery": "fas fa-images",
         "main.Slider": "fas fa-images",
         "main.Testimonial": "fas fa-quote-left",
+        "main.VisionMission": "fas fa-bullseye",
+        "main.ImpactCounter": "fas fa-chart-line",
+        "main.Volunteer": "fas fa-hands-helping",
+        "main.TeamMember": "fas fa-users",
+        "main.Certificate": "fas fa-award",
     },
     
     "show_ui_builder": False, # Hide UI builder from user to keep it clean
 }
 
 JAZZMIN_UI_TWEAKS = {
-    "theme": "flatly", # A very clean, modern blue/grey theme
+    "theme": "flatly", 
     "dark_mode_theme": "darkly",
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": True,
+    "theme_color": "warning",
+    "navbar": "navbar-dark",
+    "sidebar": "sidebar-dark-warning",
 }

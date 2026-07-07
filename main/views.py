@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import VisionMission, AboutUs, Event, Testimonial, Gallery, ContactMessage, ImpactCounter, Volunteer
+from .models import VisionMission, AboutUs, Event, Testimonial, Gallery, ContactMessage, ImpactCounter, Volunteer, TeamMember, Certificate
 
 def home(request):
     vision_mission = VisionMission.objects.first()
@@ -11,17 +11,27 @@ def home(request):
     testimonial_chunks = [testimonials_qs[i:i + 3] for i in range(0, len(testimonials_qs), 3)]
     
     counters = ImpactCounter.objects.filter(is_active=True)
+    team_members = TeamMember.objects.filter(is_active=True)
+    certificates = Certificate.objects.filter(is_active=True)
     context = {
         'vision_mission': vision_mission,
         'events': events,
         'testimonial_chunks': testimonial_chunks,
         'counters': counters,
+        'team_members': team_members,
+        'certificates': certificates,
     }
     return render(request, 'main/home.html', context)
 
 def about(request):
     about_info = AboutUs.objects.first()
-    context = {'about': about_info}
+    team_members = TeamMember.objects.filter(is_active=True)
+    certificates = Certificate.objects.filter(is_active=True)
+    context = {
+        'about': about_info,
+        'team_members': team_members,
+        'certificates': certificates,
+    }
     return render(request, 'main/about.html', context)
 
 def events(request):

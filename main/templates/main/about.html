@@ -29,4 +29,67 @@
     </div>
 </div>
 
+<!-- Our Team Section -->
+{% if team_members %}
+<div class="container py-4 my-4" data-aos="fade-up">
+    <h2 class="section-title">Our Team</h2>
+    <div class="row g-4 mt-2 justify-content-center">
+        {% for member in team_members %}
+        <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <div class="card border-0 text-center p-5 h-100" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(246, 197, 35, 0.3) !important; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+                <div class="mb-4">
+                    {% if member.image %}
+                        <img src="{{ member.image.url }}" alt="{{ member.name }}" class="rounded-circle shadow-lg" style="width: 140px; height: 140px; object-fit: cover; border: 3px solid var(--accent-color); margin: 0 auto;">
+                    {% else %}
+                        <div class="rounded-circle shadow-lg mx-auto d-flex align-items-center justify-content-center" style="width: 140px; height: 140px; background: linear-gradient(45deg, #0a1128, #111827); border: 3px solid var(--accent-color);">
+                            <i class="bi bi-person-fill text-white display-4"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div>
+                    <h4 class="fw-bold mb-2" style="color: var(--accent-color);">{{ member.name }}</h4>
+                    <p class="text-white-50 mb-3" style="font-size: 1.1rem;">{{ member.designation }}</p>
+                    <a href="tel:{{ member.mobile_no }}" class="text-decoration-none text-light" style="font-size: 1.05rem; padding: 8px 20px; background: rgba(255,255,255,0.05); border-radius: 30px; display: inline-block;">
+                        <i class="bi bi-telephone-fill me-2" style="color: var(--accent-color);"></i> {{ member.mobile_no }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Certificates Section -->
+{% if certificates %}
+<div class="container py-4 my-4" data-aos="fade-up">
+    <h2 class="section-title">Our Recognitions & Certificates</h2>
+    <div class="row g-4 mt-2 justify-content-center">
+        {% for certificate in certificates %}
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <div class="card border-0 text-center p-3 h-100" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(246, 197, 35, 0.3) !important; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); overflow: hidden;">
+                <div class="mb-3" style="overflow: hidden; border-radius: 10px; border: 1px solid rgba(246, 197, 35, 0.2);">
+                    {% if certificate.image %}
+                        <img src="{{ certificate.image.url }}" alt="{{ certificate.title }}" class="img-fluid w-100" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center w-100" style="height: 200px; background: linear-gradient(45deg, #0a1128, #111827);">
+                            <i class="bi bi-award text-white display-1"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if certificate.title %}
+                    <h5 class="fw-bold mb-1" style="color: var(--accent-color);">{{ certificate.title }}</h5>
+                    {% endif %}
+                    {% if certificate.issued_by %}
+                    <p class="text-white-50 small mb-0"><i class="bi bi-building me-1"></i> {{ certificate.issued_by }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
 {% endblock %}

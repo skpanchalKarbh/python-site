@@ -25,7 +25,10 @@
                             <span class="badge mb-3 py-2 px-3 rounded-pill" style="background: var(--accent-color); color: #000;">{{ event.get_event_type_display }}</span>
                             <h3 class="card-title text-white fw-bold mb-3">{{ event.title }}</h3>
                             {% if event.date %}
-                            <p class="card-text text-white-50 mb-3"><i class="bi bi-calendar text-warning me-2"></i> {{ event.date|date:"F d, Y" }}</p>
+                            <p class="card-text text-white-50 mb-1"><i class="bi bi-calendar text-warning me-2"></i> {{ event.date|date:"F d, Y" }}</p>
+                            {% endif %}
+                            {% if event.place %}
+                            <p class="card-text text-white-50 mb-3"><i class="bi bi-geo-alt-fill text-warning me-2"></i> {{ event.place }}</p>
                             {% endif %}
                             <p class="card-text text-light" style="line-height: 1.8; color: #cbd5e1 !important;">{{ event.description|linebreaksbr }}</p>
                         </div>

@@ -4,9 +4,42 @@
 <style>
     .hero-animated {
         position: relative;
-        background: linear-gradient(135deg, #0a1128 0%, #000000 100%);
-        min-height: 85vh;
+        background-color: #060b19; /* Very dark navy */
+        min-height: 95vh;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Huge glowing orbs in the background */
+    .hero-glow-1 {
+        position: absolute;
+        top: -10%;
+        right: -5%;
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(circle, rgba(246, 197, 35, 0.12) 0%, transparent 70%);
+        border-radius: 50%;
+        filter: blur(60px);
+        z-index: 1;
+        animation: pulseGlow 8s infinite alternate;
+    }
+
+    .hero-glow-2 {
+        position: absolute;
+        bottom: -20%;
+        left: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(0, 123, 255, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        filter: blur(60px);
+        z-index: 1;
+    }
+
+    @keyframes pulseGlow {
+        0% { transform: scale(1); opacity: 0.8; }
+        100% { transform: scale(1.2); opacity: 1; }
     }
 
     #particles-js {
@@ -15,119 +48,148 @@
         height: 100%;
         top: 0;
         left: 0;
-        z-index: 1;
+        z-index: 2;
+        opacity: 0.6;
     }
 
     .hero-content-wrapper {
         position: relative;
-        z-index: 2;
+        z-index: 10;
         width: 100%;
-        min-height: 85vh;
-        display: flex;
-        align-items: center;
     }
 
-    /* Typography */
-    .hero-text-main {
-        font-size: 4rem;
-        font-weight: 800;
+    .hero-text-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        background: rgba(246, 197, 35, 0.1);
+        border: 1px solid rgba(246, 197, 35, 0.3);
+        border-radius: 50px;
+        color: #f6c523;
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        backdrop-filter: blur(10px);
+    }
+
+    .hero-title-main {
+        font-size: 5.5rem;
+        font-weight: 900;
         color: white;
         line-height: 1.1;
-        letter-spacing: -1px;
-        margin-bottom: 5px;
+        letter-spacing: -2px;
+        margin-bottom: 20px;
     }
 
-    .hero-text-outline {
-        font-size: 3.8rem;
-        font-weight: 800;
-        color: transparent;
-        -webkit-text-stroke: 1.5px #f6c523;
-        line-height: 1.1;
-        letter-spacing: 1px;
-        margin-bottom: 25px;
-        display: inline-block;
+    .hero-title-gradient {
+        background: linear-gradient(to right, #f6c523, #fff2a8, #f6c523);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% auto;
+        animation: shine 5s linear infinite;
     }
 
-    .hero-paragraph {
-        color: #e2e8f0;
-        font-size: 1.1rem;
+    @keyframes shine {
+        to { background-position: 200% center; }
+    }
+
+    .hero-desc {
+        color: #94a3b8;
+        font-size: 1.25rem;
         line-height: 1.8;
-        max-width: 90%;
-        margin-bottom: 35px;
+        max-width: 600px;
+        margin-bottom: 40px;
+        font-weight: 300;
     }
 
-    /* Gold Button */
-    .btn-gold {
-        background: linear-gradient(45deg, #f6c523, #e6b800);
-        color: #000;
+    .btn-hero-primary {
+        background: #f6c523;
+        color: #000 !important;
         border: none;
-        padding: 12px 35px;
-        border-radius: 30px;
+        padding: 16px 45px;
+        border-radius: 50px;
         font-weight: 800;
         font-size: 1.1rem;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         text-transform: uppercase;
-        box-shadow: 0 4px 15px rgba(246, 197, 35, 0.4);
+        letter-spacing: 1px;
+        box-shadow: 0 10px 25px rgba(246, 197, 35, 0.3);
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
     }
 
-    .btn-gold:hover {
-        background: linear-gradient(45deg, #e6b800, #f6c523);
-        color: #000;
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 0 8px 25px rgba(246, 197, 35, 0.6);
-    }
-
-    /* Custom Slider Navigation Arrows */
-    .slider-nav-btn {
+    .btn-hero-primary::before {
+        content: '';
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 50px;
-        height: 50px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        color: rgba(255, 255, 255, 0.5);
+        top: 0; left: -100%;
+        width: 50%; height: 100%;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
+        transform: skewX(-25deg);
+        animation: btnSweep 3s infinite;
+    }
+
+    @keyframes btnSweep {
+        0% { left: -100%; }
+        20% { left: 200%; }
+        100% { left: 200%; }
+    }
+
+    .btn-hero-primary:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(246, 197, 35, 0.5);
+        background: #ffdb4d;
+    }
+
+    /* Floating Glass Elements for the Right Side */
+    .glass-element {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(16px);
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 10;
-        transition: all 0.3s ease;
-        cursor: pointer;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
     }
 
-    .slider-nav-btn:hover {
-        background: rgba(255, 255, 255, 0.15);
-        color: white;
-        border-color: rgba(255, 255, 255, 0.5);
+    .glass-1 {
+        width: 120px; height: 120px;
+        top: 15%; right: 25%;
+        animation: floatObj 7s ease-in-out infinite;
+        border-top: 1px solid rgba(246, 197, 35, 0.4);
     }
 
-    .slider-nav-left {
-        left: 20px;
+    .glass-2 {
+        width: 220px; height: 220px;
+        top: 40%; right: 0%;
+        animation: floatObj 9s ease-in-out infinite reverse;
+        border-right: 1px solid rgba(0, 123, 255, 0.4);
     }
 
-    .slider-nav-right {
-        right: 20px;
+    .glass-3 {
+        width: 150px; height: 150px;
+        bottom: 10%; right: 30%;
+        animation: floatObj 8s ease-in-out infinite 1s;
+        border-bottom: 1px solid rgba(246, 197, 35, 0.4);
     }
 
-    /* Floating Animation for Image */
-    .floating-img {
-        animation: float 6s ease-in-out infinite;
-        filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+    .glass-element i {
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.8);
+        filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
     }
 
-    @keyframes float {
-        0% {
-            transform: translateY(0px);
-        }
+    .glass-1 i { color: #f6c523; }
+    .glass-3 i { color: #007bff; }
 
-        50% {
-            transform: translateY(-20px);
-        }
-
-        100% {
-            transform: translateY(0px);
-        }
+    @keyframes floatObj {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-30px) rotate(5deg); }
     }
 
     /* Premium Event Cards */
@@ -167,37 +229,71 @@
 
 <!-- Animated Hero Section -->
 <div class="hero-animated">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
     <!-- Particles Background -->
     <div id="particles-js"></div>
 
-    <!-- Main Content -->
     <div class="container hero-content-wrapper">
-        <div class="row align-items-center justify-content-center">
-
-            <!-- Left Text Content (Vision & Mission) -->
-            <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start z-index-2" data-aos="fade-right" data-aos-duration="1500">
-                <div class="mb-4">
-                    <h2 class="text-white fw-bold mb-2"><i class="bi bi-eye text-warning me-2"></i> Our Vision</h2>
-                    <p class="hero-paragraph mx-auto mx-lg-0 mb-0">
-                        {{ vision_mission.vision }}
-                    </p>
+        <div class="row align-items-center">
+            
+            <!-- Left Content: Powerful Typography -->
+            <div class="col-lg-7 text-center text-lg-start z-index-2" data-aos="fade-right" data-aos-duration="1500">
+                <div class="hero-text-badge">
+                    <i class="bi bi-star-fill me-2"></i> Patrakaar Ekta Foundation
                 </div>
-                
-                <div class="mb-4">
-                    <h2 class="text-white fw-bold mb-2"><i class="bi bi-bullseye text-warning me-2"></i> Our Mission</h2>
-                    <p class="hero-paragraph mx-auto mx-lg-0">
-                        {{ vision_mission.mission }}
-                    </p>
+                <h1 class="hero-title-main">
+                    Empowering the <br>
+                    <span class="hero-title-gradient">Voice of Truth</span>
+                </h1>
+                <p class="hero-desc mx-auto mx-lg-0">
+                    Join the nationwide movement to protect press freedom, support journalists, and uphold the integrity of independent media. We stand together for truth and justice.
+                </p>
+                <div class="mt-4">
+                    <a href="{% url 'main:join_us' %}" class="btn-hero-primary text-decoration-none">
+                        Join Us Today <i class="bi bi-arrow-right-circle-fill"></i>
+                    </a>
                 </div>
-
-                <a href="{% url 'main:join_us' %}" class="btn text-dark text-decoration-none mt-2 fw-bold px-4 py-2 rounded-pill" style="background-color: #f6c523; box-shadow: 0 4px 15px rgba(246, 197, 35, 0.4); text-transform: uppercase;">Join Us</a>
             </div>
 
-            <!-- Right Floating Logo -->
-            <div class="col-lg-5 offset-lg-1 text-center z-index-2 mt-5 mt-lg-0" data-aos="zoom-in" data-aos-duration="1500">
-                <img src="{% static 'main/logo.png' %}" alt="Culture Graphic" class="img-fluid floating-img" style="max-width: 90%; filter: drop-shadow(0 0 20px rgba(246,197,35,0.5));">
+            <!-- Right Content: Floating Abstract Glass Elements -->
+            <div class="col-lg-5 d-none d-lg-block position-relative z-index-2" style="height: 600px;">
+                <div class="glass-element glass-1">
+                    <i class="bi bi-mic-fill"></i>
+                </div>
+                <div class="glass-element glass-2">
+                    <img src="{% static 'main/logo.png' %}" alt="Logo" class="img-fluid p-3" style="filter: drop-shadow(0 0 15px rgba(246,197,35,0.4));">
+                </div>
+                <div class="glass-element glass-3">
+                    <i class="bi bi-shield-check"></i>
+                </div>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<!-- Our Mission Section -->
+<div class="container py-5 my-5" data-aos="fade-up">
+    <div class="row align-items-stretch g-5">
+        <div class="col-lg-5" data-aos="fade-right">
+            <div class="position-relative h-100">
+                {% if vision_mission.image %}
+                <img src="{{ vision_mission.image.url }}" alt="Our Mission" class="img-fluid rounded-4 shadow-lg w-100 h-100" style="border: 2px solid var(--accent-color); object-fit: cover;">
+                {% else %}
+                <img src="{% static 'main/mission_default.png' %}" alt="Our Mission" class="img-fluid rounded-4 shadow-lg w-100 h-100" style="border: 2px solid var(--accent-color); object-fit: cover;">
+                {% endif %}
+                <!-- Decorative Element -->
+                <div class="position-absolute" style="bottom: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%); opacity: 0.5; z-index: -1;"></div>
+            </div>
+        </div>
+        <div class="col-lg-7 d-flex flex-column" data-aos="fade-left">
+            <h2 class="display-4 fw-bold mb-4" style="color: white;">Our <span style="color: var(--accent-color);">Mission</span></h2>
+            <div class="p-4 p-lg-5 rounded-4 shadow-sm flex-grow-1 d-flex flex-column justify-content-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(246, 197, 35, 0.1); border-left: 4px solid var(--accent-color); backdrop-filter: blur(10px);">
+                <p class="text-white-50 mb-0" style="font-size: 1.15rem; line-height: 1.9; font-weight: 300;">
+                    {{ vision_mission.mission }}
+                </p>
+            </div>
         </div>
     </div>
 </div>
@@ -207,6 +303,12 @@
 <!-- Introduction / Recent Events Section -->
 <div class="container py-5 my-5" data-aos="fade-up">
     <h2 class="section-title">Discover Recent Events</h2>
+    <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+        <h4 class="fw-bold mb-3" style="color: var(--accent-color);">Workshops, briefings, and gatherings</h4>
+        <p class="text-white-50 mx-auto" style="max-width: 700px; font-size: 1.1rem; line-height: 1.6;">
+            Our calendar updates as new sessions are scheduled. Filter by type to find what's coming up this gallery pulls live from our events feed.
+        </p>
+    </div>
     <div class="row g-5 mt-2">
         {% for event in events %}
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
@@ -219,6 +321,14 @@
                 <div class="card-body p-4 d-flex flex-column">
                     <span class="badge mb-3 align-self-start py-2 px-3 rounded-pill" style="background: var(--accent-color); color: #000;">{{ event.get_event_type_display }}</span>
                     <h4 class="card-title fw-bold mb-3 text-white">{{ event.title }}</h4>
+                    <div class="mb-3">
+                        {% if event.date %}
+                        <small class="text-warning me-3"><i class="bi bi-calendar-event me-1"></i> {{ event.date|date:"F d, Y" }}</small>
+                        {% endif %}
+                        {% if event.place %}
+                        <small class="text-warning"><i class="bi bi-geo-alt-fill me-1"></i> {{ event.place }}</small>
+                        {% endif %}
+                    </div>
                     <p class="card-text mb-4 flex-grow-1" style="font-size: 1.05rem; line-height: 1.6; color: #cbd5e1;">{{ event.description|truncatewords:20 }}</p>
                     <a href="{% url 'main:events' %}" class="text-decoration-none fw-bold"
                         style="color: var(--accent-color);">Read Full Story <i class="bi bi-arrow-right ms-2"></i></a>
@@ -249,6 +359,69 @@
             </div>
             {% endfor %}
         </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Our Team Section -->
+{% if team_members %}
+<div class="container py-4 my-4" data-aos="fade-up">
+    <h2 class="section-title">Our Team</h2>
+    <div class="row g-4 mt-2 justify-content-center">
+        {% for member in team_members %}
+        <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <div class="card border-0 text-center p-5 h-100" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(246, 197, 35, 0.3) !important; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+                <div class="mb-4">
+                    {% if member.image %}
+                        <img src="{{ member.image.url }}" alt="{{ member.name }}" class="rounded-circle shadow-lg" style="width: 140px; height: 140px; object-fit: cover; border: 3px solid var(--accent-color); margin: 0 auto;">
+                    {% else %}
+                        <div class="rounded-circle shadow-lg mx-auto d-flex align-items-center justify-content-center" style="width: 140px; height: 140px; background: linear-gradient(45deg, #0a1128, #111827); border: 3px solid var(--accent-color);">
+                            <i class="bi bi-person-fill text-white display-4"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div>
+                    <h4 class="fw-bold mb-2" style="color: var(--accent-color);">{{ member.name }}</h4>
+                    <p class="text-white-50 mb-3" style="font-size: 1.1rem;">{{ member.designation }}</p>
+                    <a href="tel:{{ member.mobile_no }}" class="text-decoration-none text-light" style="font-size: 1.05rem; padding: 8px 20px; background: rgba(255,255,255,0.05); border-radius: 30px; display: inline-block;">
+                        <i class="bi bi-telephone-fill me-2" style="color: var(--accent-color);"></i> {{ member.mobile_no }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Certificates Section -->
+{% if certificates %}
+<div class="container py-4 my-4" data-aos="fade-up">
+    <h2 class="section-title">Our Recognitions & Certificates</h2>
+    <div class="row g-4 mt-2 justify-content-center">
+        {% for certificate in certificates %}
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <div class="card border-0 text-center p-3 h-100" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(246, 197, 35, 0.3) !important; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); overflow: hidden;">
+                <div class="mb-3" style="overflow: hidden; border-radius: 10px; border: 1px solid rgba(246, 197, 35, 0.2);">
+                    {% if certificate.image %}
+                        <img src="{{ certificate.image.url }}" alt="{{ certificate.title }}" class="img-fluid w-100" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center w-100" style="height: 200px; background: linear-gradient(45deg, #0a1128, #111827);">
+                            <i class="bi bi-award text-white display-1"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if certificate.title %}
+                    <h5 class="fw-bold mb-1" style="color: var(--accent-color);">{{ certificate.title }}</h5>
+                    {% endif %}
+                    {% if certificate.issued_by %}
+                    <p class="text-white-50 small mb-0"><i class="bi bi-building me-1"></i> {{ certificate.issued_by }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endif %}

@@ -1,15 +1,15 @@
 from django.db import models
 
 class VisionMission(models.Model):
-    vision = models.TextField(help_text="Enter the Vision statement for the home page.", default="To build a fearless and empowered community of journalists where truth prevails, and every voice is heard and protected across the nation.")
-    mission = models.TextField(help_text="Enter the Mission statement for the home page.", default="We are dedicated to safeguarding the rights of the press, providing essential support to media professionals, and promoting ethical, unbiased journalism for a stronger democracy.")
+    mission = models.TextField(help_text="Enter the Mission statement.", default="We are dedicated to safeguarding the rights of the press, providing essential support to media professionals, and promoting ethical, unbiased journalism for a stronger democracy.")
+    image = models.ImageField(upload_to='mission/', blank=True, null=True, help_text="Upload an image for the mission section.")
 
     class Meta:
-        verbose_name = "Vision & Mission"
-        verbose_name_plural = "Vision & Mission"
+        verbose_name = "Mission"
+        verbose_name_plural = "Mission"
 
     def __str__(self):
-        return "Website Vision and Mission"
+        return "Website Mission"
 
 class AboutUs(models.Model):
     title = models.CharField(max_length=200, default="About Us")
@@ -30,6 +30,7 @@ class Event(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='events/')
     date = models.DateField(blank=True, null=True)
+    place = models.CharField(max_length=200, blank=True, null=True)
     event_type = models.CharField(max_length=50, choices=EVENT_TYPES, default='OTHER')
     is_active = models.BooleanField(default=True)
 
@@ -101,3 +102,34 @@ class Volunteer(models.Model):
 
     def __str__(self):
         return f"Volunteer: {self.name} - {self.email}"
+
+class TeamMember(models.Model):
+    name = models.CharField(max_length=100)
+    designation = models.CharField(max_length=100)
+    mobile_no = models.CharField(max_length=20)
+    image = models.ImageField(upload_to='team/')
+    is_active = models.BooleanField(default=True)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', 'id']
+        verbose_name_plural = "Our Team"
+        verbose_name = "Team Member"
+
+    def __str__(self):
+        return self.name
+
+class Certificate(models.Model):
+    title = models.CharField(max_length=200, blank=True, null=True)
+    issued_by = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(upload_to='certificates/')
+    is_active = models.BooleanField(default=True)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', 'id']
+        verbose_name_plural = "Certificates"
+        verbose_name = "Certificate"
+
+    def __str__(self):
+        return self.title if self.title else f"Certificate {self.id}"
