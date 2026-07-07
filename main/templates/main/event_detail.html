@@ -27,36 +27,36 @@
             <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="mb-5">
                     <img class="img-fluid w-100 rounded mb-5" src="{{ event.image.url }}" alt="{{ event.title }}">
-                    <h1 class="mb-4">{{ event.title }}</h1>
+                    <h1 class="mb-4 text-white">{{ event.title }}</h1>
                     
                     <div class="d-flex mb-4">
                         {% if event.date %}
                         <div class="d-flex align-items-center me-4">
-                            <i class="far fa-calendar-alt text-primary me-2"></i>
-                            <span>{{ event.date|date:"F d, Y" }}</span>
+                            <i class="far fa-calendar-alt text-warning me-2"></i>
+                            <span class="text-light">{{ event.date|date:"F d, Y" }}</span>
                         </div>
                         {% endif %}
                         {% if event.place %}
                         <div class="d-flex align-items-center me-4">
-                            <i class="fas fa-map-marker-alt text-primary me-2"></i>
-                            <span>{{ event.place }}</span>
+                            <i class="fas fa-map-marker-alt text-warning me-2"></i>
+                            <span class="text-light">{{ event.place }}</span>
                         </div>
                         {% endif %}
                         <div class="d-flex align-items-center">
-                            <i class="fas fa-tag text-primary me-2"></i>
-                            <span>{{ event.get_event_type_display }}</span>
+                            <i class="fas fa-tag text-warning me-2"></i>
+                            <span class="text-light">{{ event.get_event_type_display }}</span>
                         </div>
                     </div>
                     
-                    <div class="fs-5 text-body mb-5">
-                        <p>{{ event.description|linebreaks }}</p>
+                    <div class="fs-5 mb-5" style="line-height: 1.8; color: #cbd5e1;">
+                        <p>{{ event.description|linebreaksbr }}</p>
                     </div>
                 </div>
 
                 <!-- Multiple Images Gallery -->
                 {% if event.images.all %}
                 <div class="mb-5">
-                    <h3 class="mb-4">Event Gallery</h3>
+                    <h3 class="mb-4 text-white">Event Gallery</h3>
                     <div class="row g-3">
                         {% for img in event.images.all %}
                         <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.{{ forloop.counter }}s">
@@ -72,28 +72,28 @@
 
             <!-- Sidebar -->
             <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="bg-light rounded p-4 mb-5">
-                    <h4 class="mb-4">Event Info</h4>
+                <div class="rounded p-4 mb-5" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(246, 197, 35, 0.2);">
+                    <h4 class="mb-4 text-white">Event Info</h4>
                     <ul class="list-unstyled mb-0">
-                        <li class="d-flex justify-content-between border-bottom py-3">
-                            <span class="text-body"><strong>Date:</strong></span>
-                            <span class="text-primary">{{ event.date|default:"TBA" }}</span>
+                        <li class="d-flex justify-content-between border-bottom border-secondary py-3">
+                            <span class="text-light"><strong>Date:</strong></span>
+                            <span class="text-warning">{{ event.date|default:"TBA" }}</span>
                         </li>
-                        <li class="d-flex justify-content-between border-bottom py-3">
-                            <span class="text-body"><strong>Location:</strong></span>
-                            <span class="text-primary">{{ event.place|default:"TBA" }}</span>
+                        <li class="d-flex justify-content-between border-bottom border-secondary py-3">
+                            <span class="text-light"><strong>Location:</strong></span>
+                            <span class="text-warning">{{ event.place|default:"TBA" }}</span>
                         </li>
                         <li class="d-flex justify-content-between py-3">
-                            <span class="text-body"><strong>Type:</strong></span>
-                            <span class="text-primary">{{ event.get_event_type_display }}</span>
+                            <span class="text-light"><strong>Type:</strong></span>
+                            <span class="text-warning">{{ event.get_event_type_display }}</span>
                         </li>
                     </ul>
                 </div>
                 
-                <div class="bg-light rounded p-4 text-center">
-                    <h4 class="mb-4">Join Our Cause</h4>
-                    <p class="mb-4">Become a part of our mission and make a difference.</p>
-                    <a href="{% url 'main:join_us' %}" class="btn btn-primary py-2 px-4">Volunteer Now</a>
+                <div class="rounded p-4 text-center" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(246, 197, 35, 0.2);">
+                    <h4 class="mb-4 text-white">Join Our Cause</h4>
+                    <p class="mb-4 text-light">Become a part of our mission and make a difference.</p>
+                    <a href="{% url 'main:join_us' %}" class="btn py-2 px-4" style="background-color: var(--accent-color); color: #000; font-weight: bold;">Volunteer Now</a>
                 </div>
             </div>
         </div>
