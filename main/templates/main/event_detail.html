@@ -4,15 +4,24 @@
 {% block title %}{{ event.title }} - Patrakaar Ekta Foundation{% endblock %}
 
 {% block content %}
+<style>
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: " > " !important;
+        color: white !important;
+    }
+    .breadcrumb-item.active {
+        color: #ffc107 !important;
+    }
+</style>
 <!-- Page Header Start -->
 <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static 'main/premium_hero_bg.png' %}') center center no-repeat; background-size: cover;">
     <div class="container text-center">
         <h1 class="display-4 text-white animated slideInDown mb-4">Event Details</h1>
-        <nav aria-label="breadcrumb animated slideInDown" style="--bs-breadcrumb-divider: '>';">
+        <nav aria-label="breadcrumb animated slideInDown">
             <ol class="breadcrumb justify-content-center mb-0">
                 <li class="breadcrumb-item"><a class="text-white" href="{% url 'main:home' %}">Home</a></li>
                 <li class="breadcrumb-item"><a class="text-white" href="{% url 'main:events' %}">Events</a></li>
-                <li class="breadcrumb-item text-warning active" aria-current="page">{{ event.title }}</li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #ffc107 !important;">{{ event.title }}</li>
             </ol>
         </nav>
     </div>
