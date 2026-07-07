@@ -133,3 +133,10 @@ class Certificate(models.Model):
 
     def __str__(self):
         return self.title if self.title else f"Certificate {self.id}"
+
+class EventImage(models.Model):
+    event = models.ForeignKey(Event, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='events/multiple/')
+    
+    def __str__(self):
+        return f"Image for {self.event.title}"

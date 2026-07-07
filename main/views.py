@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 import threading
 from django.core.mail import send_mail
@@ -41,6 +41,10 @@ def events(request):
     events = Event.objects.filter(is_active=True)
     context = {'events': events}
     return render(request, 'main/events.html', context)
+
+def event_detail(request, pk):
+    event = get_object_or_404(Event, pk=pk, is_active=True)
+    return render(request, 'main/event_detail.html', {'event': event})
 
 def gallery(request):
     images = Gallery.objects.filter(is_active=True)

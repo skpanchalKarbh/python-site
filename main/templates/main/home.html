@@ -330,7 +330,7 @@
                         {% endif %}
                     </div>
                     <p class="card-text mb-4 flex-grow-1" style="font-size: 1.05rem; line-height: 1.6; color: #cbd5e1;">{{ event.description|truncatewords:20 }}</p>
-                    <a href="{% url 'main:events' %}" class="text-decoration-none fw-bold"
+                    <a href="{% url 'main:event_detail' event.id %}" class="text-decoration-none fw-bold"
                         style="color: var(--accent-color);">Read Full Story <i class="bi bi-arrow-right ms-2"></i></a>
                 </div>
             </div>

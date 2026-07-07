@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import VisionMission, AboutUs, Event, Testimonial, Gallery, ContactMessage, ImpactCounter, Volunteer, TeamMember, Certificate
+from .models import VisionMission, AboutUs, Event, Testimonial, Gallery, ContactMessage, ImpactCounter, Volunteer, TeamMember, Certificate, EventImage
 
 @admin.register(VisionMission)
 class VisionMissionAdmin(admin.ModelAdmin):
@@ -9,11 +9,17 @@ class VisionMissionAdmin(admin.ModelAdmin):
 class AboutUsAdmin(admin.ModelAdmin):
     list_display = ('title',)
 
+class EventImageInline(admin.TabularInline):
+    model = EventImage
+    extra = 1
+    max_num = 10
+
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'event_type', 'date', 'place', 'is_active')
     list_filter = ('event_type', 'is_active')
     search_fields = ('title', 'place')
+    inlines = [EventImageInline]
 
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
